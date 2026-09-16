@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Camera-powered rock paper scissors against an AI opponent.">
+	<title>Hand//Battle | Camera vs AI</title>
+	<link rel="stylesheet" href="pro3.css">
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+	<script src="pro3.js" defer></script>
+</head>
+<body>
+	<div class="page">
+		<header class="header">
+			<a class="logo" href="pro3.html"><span class="logo-mark" aria-hidden="true"><span></span><span></span><span></span></span>HAND<em>//</em>BATTLE</a>
+			<div class="status"><i class="status-dot"></i><span id="live-status">CAMERA STANDBY</span></div>
+		</header>
+
+		<main>
+			<section class="hero">
+				<div class="hero-copy"><p class="eyebrow">Live arena / 001</p><h1>Make your<br><span>move.</span></h1><p>Point your hand at the camera. The AI is watching, reading your gesture, and ready to throw down.</p></div>
+				<div class="round-box"><small>Match status</small><strong>ROUND <span id="round">00</span></strong><small>First to 5 wins</small></div>
+			</section>
+
+			<section class="arena" aria-label="Game arena">
+				<article class="combatant player">
+					<div class="combatant-head"><h2><span>01</span> You</h2><span class="tag">CAMERA INPUT</span></div>
+					<div class="screen"><video id="camera-video" class="camera-feed hidden" autoplay playsinline muted></video><canvas id="hand-overlay" class="hand-overlay"></canvas><div id="camera-placeholder" class="camera-placeholder"><div><span>◉</span>Enable camera to<br>play with your hand</div></div><b class="detected" id="detected-move">SHOW YOUR HAND</b></div>
+					<div class="score-strip"><span>PLAYER SCORE</span><strong id="player-score">00</strong></div>
+				</article>
+				<div class="vs"><span class="vs-label">VERSUS</span><strong>VS</strong><p class="arena-message" id="arena-message">Choose your move to begin.</p></div>
+				<article class="combatant ai">
+					<div class="combatant-head"><h2><span>02</span> AI unit</h2><span class="tag">RANDOMIZED</span></div>
+					<div class="screen"><span class="ai-thinking hidden" id="ai-thinking">Thinking...</span><span class="ai-choice hidden" id="ai-choice">●</span></div>
+					<div class="score-strip"><span>AI SCORE</span><strong id="ai-score">00</strong></div>
+				</article>
+			</section>
+
+			<section class="controls" aria-label="Game controls">
+				<button class="camera-button" id="camera-button" type="button">Enable camera</button>
+				<div class="move-panel"><button class="move-button" data-move="rock" type="button">● Rock</button><button class="move-button" data-move="paper" type="button">▣ Paper</button><button class="move-button" data-move="scissors" type="button">✂ Scissors</button></div>
+				<button class="reset-button" id="reset-button" type="button">Reset match</button>
+				<span class="controls-note">Manual controls stay available if camera play is unavailable.</span>
+			</section>
+
+			<section class="how-to"><div><p class="eyebrow">No controller needed</p><h2>Read the<br><span>signals.</span></h2></div><div class="instructions"><article class="instruction"><b>01 / ROCK</b><h3>Make a fist</h3><p>Close all fingers into a tight fist and hold steady.</p></article><article class="instruction"><b>02 / PAPER</b><h3>Open your hand</h3><p>Show all four fingers extended toward the lens.</p></article><article class="instruction"><b>03 / SCISSORS</b><h3>Two fingers up</h3><p>Raise your index and middle fingers in a V shape.</p></article></div></section>
+		</main>
+		<footer><span>HAND//BATTLE — camera vs machine</span><span><a href="https://mediapipe.dev/" target="_blank" rel="noreferrer">Powered by MediaPipe Hands</a></span></footer>
+	</div>
+</body>
+</html>
