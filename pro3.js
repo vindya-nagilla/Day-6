@@ -6,6 +6,8 @@ const overlayContext = handOverlay.getContext('2d');
 const detectedMove = document.querySelector('#detected-move');
 const aiChoice = document.querySelector('#ai-choice');
 const aiThinking = document.querySelector('#ai-thinking');
+const robotIdle = document.querySelector('#robot-idle');
+const celebration = document.querySelector('#celebration');
 const message = document.querySelector('#arena-message');
 const playerScoreElement = document.querySelector('#player-score');
 const aiScoreElement = document.querySelector('#ai-score');
@@ -29,8 +31,9 @@ function setMessage(text, result = '') {
 }
 
 function playRound(playerMove) {
-  if (!moves.includes(playerMove)) return;
+  if (!moves.includes(playerMove) || playerScore >= 5 || aiScore >= 5) return;
   const aiMove = moves[Math.floor(Math.random() * moves.length)];
+  robotIdle.classList.add('hidden');
   aiThinking.classList.add('hidden');
   aiChoice.textContent = icons[aiMove];
   aiChoice.classList.remove('hidden');
@@ -48,6 +51,11 @@ function playRound(playerMove) {
   }
   playerScoreElement.textContent = String(playerScore).padStart(2, '0');
   aiScoreElement.textContent = String(aiScore).padStart(2, '0');
+  if (playerScore >= 5) {
+    celebration.classList.remove('hidden');
+    document.body.classList.add('match-won');
+    setMessage('Match complete. Human wins!', 'win');
+  }
 }
 
 function classifyGesture(landmarks) {
@@ -108,4 +116,4 @@ async function startCamera() {
 
 cameraButton.addEventListener('click', startCamera);
 document.querySelectorAll('[data-move]').forEach(button => button.addEventListener('click', () => playRound(button.dataset.move)));
-resetButton.addEventListener('click', () => { playerScore = 0; aiScore = 0; round = 0; playerScoreElement.textContent = '00'; aiScoreElement.textContent = '00'; roundElement.textContent = '00'; aiChoice.classList.add('hidden'); setMessage('Choose your move to begin.', ''); });
+resetButton.addEventListener('click', () => { playerScore = 0; aiScore = 0; round = 0; playerScoreElement.textContent = '00'; aiScoreElement.textContent = '00'; roundElement.textContent = '00'; aiChoice.classList.add('hidden'); robotIdle.classList.remove('hidden'); celebration.classList.add('hidden'); document.body.classList.remove('match-won'); setMessage('Choose your move to begin.', ''); });
